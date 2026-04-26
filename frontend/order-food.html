@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Place Order | Campus Chow</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Professional Google Font -->
+    <link href="https://googleapis.com" rel="stylesheet">
+</head>
+<body class="order-page">
+    
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">Campus<span>Chow</span></div>
+        <div class="nav-links">
+            <a href="landing-page.html">Home</a>
+            <a href="partner-with-us.html">Partner</a>
+            <a href="refund-page.html">Refund</a>
+        </div>
+    </nav>
+
+    <!-- Professional Glass Notification Area -->
+    <div id="reveal"></div>
+
+    <main class="order-container">
+        <header class="form-header">
+            <h1>Quick <span class="accent-text">Order</span></h1>
+            <p>Complete your details below. Your food will arrive in 15 mins or less!</p>
+        </header>
+
+        <form id="orderForm" class="premium-form">
+            <!-- Row 1: Full Name -->
+            <div class="input-group">
+                <label for="customerName">Full Name</label>
+                <input type="text" id="customerName" name="customerName" placeholder="Enter your name" required>
+            </div>
+
+            <!-- Row 2: Location & WhatsApp Number (Grid) -->
+            <div class="input-grid">
+                <div class="input-group">
+                    <label for="dorm">Dorm / Hostel</label>
+                    <select id="dorm" name="dorm" required>
+                        <option value="">Select your dorm</option>
+                        <option value="commonwealth-hall">Commonwealth Hall</option>
+                        <option value="akuafo-hall">Akuafo Hall</option>
+                        <option value="halm-addo-hall">Halm Addo Hall</option>
+                        <option value="aleima-hall">Aleima Hall</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="phoneNumber">WhatsApp Number</label>
+                    <!-- type="tel" ensures the number keypad opens on mobile -->
+                    <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="e.g., 0244123456" required>
+                </div>
+            </div>
+
+            <!-- Row 3: Room Details -->
+            <div class="input-group">
+                <label for="roomNumber">Room # / Specific Details</label>
+                <input type="text" id="roomNumber" name="roomNumber" placeholder="e.g., Room 305, Main Block" required>
+            </div>
+
+            <!-- Row 4: Food Selection -->
+            <div class="input-group">
+                <label for="foodItem">What are you eating?</label>
+                <select id="foodItem" name="foodItem" required>
+                    <option value="">Choose your meal</option>
+                    <option value="waakye-and-fish">Waakye and fish (25 cedis)</option>
+                    <option value="jollof-and-chicken">Jollof and chicken (30 cedis)</option>
+                    <option value="banku-and-tilapia">Banku and tilapia (45 cedis)</option>
+                    <option value="salad-bowl">Healthy Salad Bowl (10 cedis)</option>
+                </select>
+            </div>
+
+            <!-- Row 5: Payment Method -->
+            <div class="input-group">
+                <label for="paymentMethod">Payment Method</label>
+                <select id="paymentMethod" name="paymentMethod" required>
+                    <option value="">Select payment</option>
+                    <option value="card">Campus Card</option>
+                    <option value="applepay">Apple Pay</option>
+                    <option value="cash">Cash on Delivery</option>
+                </select>
+            </div>
+
+            <!-- 🚚 Delivery Fee Notice -->
+            <div style="background: #f8fafc; padding: 12px; border-radius: 12px; margin-bottom: 20px; text-align: center; border: 1px dashed #cbd5e1;">
+                <p style="font-size: 0.85rem; color: #475569; margin: 0;">
+                    Standard Delivery Fee: <strong>6.00 GHS</strong>
+                </p>
+            </div>
+
+            <button type="submit" name="submit" class="btn-main full-width">Place Order Now</button>
+        </form>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2026 Campus Chow. Delivery guaranteed or free!</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+
+

@@ -1,0 +1,96 @@
+
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Partner with Campus Chow | Grow Your Business</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://googleapis.com" rel="stylesheet">
+</head>
+<body class="partner-page">
+    <nav class="navbar">
+        <div class="logo">Campus<span>Chow</span></div>
+        <div class="nav-links">
+            <a href="landing-page.html">Home</a>
+            <a href="order-food.html" class="nav-btn-primary">Order Now</a>
+            <a href="refund-page.html">Refunds</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <div class="status-badge">💰 Earn extra revenue</div>
+            <h1>Scale your <span class="accent-text">Campus</span> business.</h1>
+            <p>Whether you're a food vendor or a student looking for a side hustle, Campus Chow is the platform to grow. Join 50+ partners today.</p>
+            <div class="hero-actions">
+                <a href="#partnerForm" class="btn-main">Join the Team</a>
+                <a href="#why-partner" class="btn-sub">Learn More</a>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <img src="https://unsplash.com" alt="Partner with us">
+        </div>
+    </header>
+
+    <section class="section" id="why-partner">
+        <h2 class="section-title">Why Partner With Us?</h2>
+        <div class="grid-container">
+            <div class="glass-card">
+                <div class="avatar">📈</div>
+                <h3>More Customers</h3>
+                <p>Instantly reach thousands of students in Commonwealth, Akuafo, and beyond without spending on ads.</p>
+            </div>
+            <div class="glass-card">
+                <div class="avatar">📉</div>
+                <h3>Lowest Commissions</h3>
+                <p>We only take 10% on orders. No hidden setup fees, no monthly subscriptions. We grow when you grow.</p>
+            </div>
+            <div class="glass-card">
+                <div class="avatar">⚡</div>
+                <h3>Fast Logistics</h3>
+                <p>Don't worry about bikes. Our fleet of student cyclists handles all deliveries within 15 minutes.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section partner-form-section">
+        <h2 class="section-title">Apply to Join</h2>
+        <form id="partnerForm" class="premium-form">
+            <div class="input-group">
+                <label for="businessName">Full Name or Business Name</label>
+                <input type="text" id="businessName" name="businessName" placeholder="e.g., Auntie Muni Waakye" required>
+            </div>
+
+            <div class="input-group">
+                <label for="contactEmail">Email Address</label>
+                <input type="email" id="contactEmail" name="contactEmail" placeholder="yourname@gmail.com" required>
+            </div>
+
+            <div class="input-group">
+                <label for="interest">What are you interested in?</label>
+                <select id="interest" name="interest" required>
+                    <option value="">Choose an option</option>
+                    <option value="vendor">Food Vendor Partner</option>
+                    <option value="rider">Delivery Rider (Cyclist)</option>
+                    <option value="job">Marketing / Internship</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label for="message">Additional Details</label>
+                <textarea id="message" name="message" rows="4" placeholder="Tell us about your menu or your availability..."></textarea>
+            </div>
+
+            <button type="submit" class="btn-main full-width" id="submit-interest">Submit Application</button>
+        </form>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2026 Campus Chow. Empowering campus entrepreneurs.</p>
+    </footer>
+
+    <script src="partner.js"></script>
+</body>
+</html>
+

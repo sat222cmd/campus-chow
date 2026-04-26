@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request Refund | Campus Chow</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://googleapis.com" rel="stylesheet">
+</head>
+
+<body class="refund-page">
+    <!-- Professional Navbar -->
+    <nav class="navbar">
+        <div class="logo">Campus<span>Chow</span></div>
+        <div class="nav-links">
+            <a href="landing-page.html">Home</a>
+            <a href="order-food.html">Order Food</a>
+            <a href="partner-with-us.html">Partner</a>
+        </div>
+    </nav>
+<div class="idk"  id="refine"></div>
+    <main class="order-container">
+        <header class="form-header">
+            <div class="status-badge">🛡️ 100% Guarantee</div>
+            <h1>Request a <span class="accent-text">Refund</span></h1>
+            <p>Was your food late or did something go wrong? Tell us below and we'll fix it.</p>
+        </header>
+
+        <form id="refundForm" class="premium-form">
+            <div class="input-group">
+                <label for="order-id">Order ID #</label>
+                <input type="text" id="order-id" name="orderId" placeholder="Found in your receipt" required>
+            </div>
+
+            <div class="input-group">
+                <label for="name-refund">Your Name</label>
+                <input type="text" id="name-refund" name="name" placeholder="Enter your full name" required>
+            </div>
+
+            <div class="input-group">
+                <label for="reason">Reason for Refund</label>
+                <textarea id="reason" name="reason" rows="4" placeholder="Describe the issue (e.g., Delivery took 25 minutes)"></textarea>
+            </div>
+
+            <div class="refund-info">
+                <p>💡 <strong>Note:</strong> Refunds for late delivery (over 15 mins) are processed within 24 hours.</p>
+            </div>
+
+            <button type="submit" class="btn-main full-width">Submit Refund Request</button>
+        </form>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2026 Campus Chow. Delivery guaranteed or free!</p>
+    </footer>
+
+    <script src="refundPage.js"></script>
+</body>
+</html>

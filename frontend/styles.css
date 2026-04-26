@@ -1,0 +1,426 @@
+/* 1. BRAND COLORS & FONTS */
+@import url('https://googleapis.com');
+
+:root {
+    --primary: #FF6B35;
+    --secondary: #2C3E50;
+    --accent: #F7931E;
+    --bg-light: #FAFAFA;
+    --white: #FFFFFF;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: var(--bg-light);
+    color: var(--secondary);
+    line-height: 1.6;
+}
+
+/* 2. NAVIGATION */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 8%;
+    background: var(--white);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+}
+
+.logo span { color: var(--primary); }
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--secondary);
+    font-weight: 600;
+    margin-left: 2rem;
+    transition: 0.3s;
+}
+
+.nav-btn-primary {
+    background: var(--primary);
+    color: white !important;
+    padding: 0.7rem 1.5rem;
+    border-radius: 8px;
+}
+
+/* 3. HERO SECTION */
+.hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 5rem 8%;
+    gap: 3rem;
+}
+
+.status-badge {
+    background: #FFF5F0;
+    color: var(--primary);
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    font-weight: 800;
+    text-align: left; /* Fixes your previous center-only rule */
+}
+
+.accent-text { color: var(--primary); }
+
+.hero-actions { display: flex; gap: 1rem; }
+
+.btn-main {
+    background: var(--primary);
+    color: white;
+    text-decoration: none;
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    font-weight: 700;
+    transition: 0.3s;
+}
+
+.btn-sub {
+    border: 2px solid var(--secondary);
+    color: var(--secondary);
+    text-decoration: none;
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    font-weight: 700;
+}
+
+.hero-visual img {
+    width: 100%;
+    border-radius: 25px;
+    box-shadow: 15px 15px 0px var(--accent);
+}
+
+/* 4. CARDS & SECTIONS */
+.section { padding: 4rem 8%; }
+
+.section-title {
+    text-align: center;
+    font-size: 2.2rem;
+    margin-bottom: 3rem;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.glass-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 20px;
+    border: 1px solid #eee;
+    transition: 0.3s;
+}
+
+.glass-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+/* 5. TEAM */
+.team-member { text-align: center; }
+
+.avatar {
+    width: 70px;
+    height: 70px;
+    background: var(--secondary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    font-weight: 800;
+}
+
+.footer {
+    background: var(--secondary);
+    color: white;
+    text-align: center;
+    padding: 2rem;
+    margin-top: 4rem;
+}
+
+/* 6. UNIFIED RESPONSIVE DESIGN */
+@media (max-width: 900px) {
+    /* Instead of forcing 2 columns, we let them stack */
+    .hero {
+        grid-template-columns: 1fr !important; /* Forces 1 column */
+        text-align: center;
+        padding: 2rem 5%;
+        gap: 2rem;
+    }
+
+    /* Make sure the image doesn't get too giant on tablets */
+    .hero-visual img {
+        max-width: 400px;
+        margin: 0 auto;
+    }
+
+    .hero-content {
+        order: 2; 
+    }
+
+    .hero-visual {
+        order: 1; 
+    }
+
+    .hero h1 {
+        font-size: 2.2rem; /* Shorter text for smaller screens */
+        text-align: center;
+    }
+
+    .hero-actions {
+        flex-direction: column; /* Buttons stack on top of each other */
+        align-items: center;
+    }
+
+    .btn-main, .btn-sub {
+        width: 100%; /* Buttons become full-width on mobile */
+        max-width: 300px;
+    }
+
+    /* Fix Navigation */
+    .navbar {
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .nav-links {
+        margin-top: 1rem;
+        display: flex;
+        flex-wrap: wrap; /* Lets links wrap to next line if needed */
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .nav-links a {
+        margin: 0;
+        font-size: 0.9rem;
+    }
+}
+
+
+@media (max-width: 600px) {
+    /* Form specific mobile fixes */
+    .input-grid {
+        grid-template-columns: 1fr; /* Stack Dorm and Room # */
+    }
+
+    .premium-form {
+        padding: 1.5rem;
+        border-radius: 16px;
+    }
+
+    .section {
+        padding: 3rem 5%;
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+    }
+}
+
+
+/* ORDER PAGE SPECIFIC STYLES */
+.order-container {
+    max-width: 600px;
+    margin: 3rem auto;
+    padding: 0 1.5rem;
+}
+
+.form-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.form-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.premium-form {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 24px;
+    border: 1px solid #E2E8F0;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+}
+
+.input-group {
+    margin-bottom: 1.5rem;
+}
+
+.input-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.premium-form label {
+    display: block;
+    font-weight: 700;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    color: var(--secondary);
+}
+
+.premium-form input, 
+.premium-form select {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 2px solid #F1F5F9;
+    border-radius: 12px;
+    background: #F8FAFC;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.premium-form input:focus, 
+.premium-form select:focus {
+    outline: none;
+    border-color: var(--primary);
+    background: white;
+    box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.1);
+}
+
+.full-width {
+    width: 100%;
+    border: none;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+
+/* MOBILE FIX FOR ORDER FORM */
+@media (max-width: 500px) {
+    .input-grid {
+        grid-template-columns: 1fr;
+    }
+    .premium-form {
+        padding: 1.5rem;
+    }
+}
+
+/* PARTNER PAGE EXTRAS */
+.partner-form-section {
+    background-color: #f0f4f8; /* Light blue/grey to separate it from the white sections */
+}
+
+.partner-page .glass-card h3 {
+    margin: 1rem 0;
+    font-size: 1.4rem;
+    font-weight: 800;
+}
+
+.partner-page .avatar {
+    font-size: 2rem;
+    background: #FFF5F0;
+    width: 60px;
+    height: 60px;
+    margin: 0; /* Align left in cards */
+}
+
+textarea {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 2px solid #F1F5F9;
+    border-radius: 12px;
+    background: #F8FAFC;
+    font-family: inherit;
+    font-size: 1rem;
+    resize: none;
+    transition: all 0.3s ease;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    background: white;
+}
+
+.partner-page .section-title {
+    margin-bottom: 4rem;
+}
+
+/* REFUND PAGE EXTRAS */
+.refund-info {
+    background: #f1f5f9;
+    padding: 1rem;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    color: #475569;
+    margin-bottom: 1.5rem;
+    border-left: 4px solid var(--primary);
+}
+
+.refund-page .form-header p {
+    max-width: 450px;
+    margin: 0 auto;
+}
+
+#reveal {
+    /* 1. ELITE POSITIONING */
+    position: fixed;
+    bottom: 30px;
+    right: 30px;         /* Professional standard is the Right corner */
+    left: auto;          /* Clears your previous left setting */
+    z-index: 2000;
+
+    /* 2. REFINED DIMENSIONS */
+    width: 300px;
+    padding: 16px 20px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    
+    /* 3. PREMIUM GLASS (Dark Mode Professional) */
+    background: rgba(15, 23, 42, 0.9); /* Deep slate blue */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+    
+    /* 4. TYPOGRAPHY */
+    color: #F8FAFC;
+    line-height: 1.4;
+    list-style: none;
+    
+    /* 5. ENTRANCE ANIMATION */
+    animation: slideIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes slideIn {
+    from { transform: translateX(100px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+
+
+
+
+
