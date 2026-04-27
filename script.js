@@ -71,7 +71,3 @@ orderForm.addEventListener('submit', function(e) {
         setTimeout(() => { reveal.style.display = 'none'; }, 500);
     }, 6000);
 });
-
-
-
-
