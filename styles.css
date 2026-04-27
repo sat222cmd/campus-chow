@@ -420,6 +420,42 @@ textarea:focus {
 }
 
 
+/* 1. Define the Button Style */
+.btn-main {
+    background-color: #ff4500; /* Vibrant Orange/Red */
+    color: white;
+    padding: 15px 30px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+    transition: transform 0.3s ease;
+    /* 2. Apply the animation */
+    animation: pulse-glow 2s infinite;
+}
+
+/* 3. The Animation Logic */
+@keyframes pulse-glow {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 69, 0, 0.7);
+        transform: scale(1);
+    }
+    70% {
+        box-shadow: 0 0 0 15px rgba(255, 69, 0, 0);
+        transform: scale(1.05); /* Slightly grows */
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 69, 0, 0);
+        transform: scale(1);
+    }
+}
+
+/* 4. Hover effect to stop pulse and feel interactive */
+.btn-main:hover {
+    animation: none;
+    background-color: #e03e00;
+    transform: translateY(-3px);
+}
 
 
 
