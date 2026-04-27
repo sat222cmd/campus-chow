@@ -30,6 +30,7 @@ orderForm.addEventListener('submit', function(e) {
     const dispatcherNumber = "233204147897"; 
     
     // 5. Build the "Job Ticket" for the Couriers
+        // 5. Build the "Job Ticket" for the Couriers
     const message = `🚀 *CAMPUS CHOW JOB* 🚀%0A%0A` +
                     `*ORDER:* ${food} (${mealPrice} GHS)%0A` +
                     `*DELIVERY:* ${deliveryFee} GHS%0A` +
@@ -39,6 +40,7 @@ orderForm.addEventListener('submit', function(e) {
                     `🏠 *LOCATION:* ${dorm}, ${room}%0A` +
                     `📱 *CONTACT:* https://wa.me{formattedCustomerPhone}%0A%0A` +
                     `🚀 _Sent via *Campus Chow*_`;
+
 
     const whatsappURL = "https://wa.me/" + dispatcherNumber + "?text=" + message;
 
