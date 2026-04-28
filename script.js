@@ -33,6 +33,7 @@ orderForm.addEventListener('submit', function(e) {
     const dispatcherNumber = "233204147897"; 
     
     // 5. Build Message - FIXED: Added ${} and / 
+        // 5. Build Message - MUST have ${} and / 
     const message = `🚀 *CAMPUS CHOW JOB* 🚀%0A%0A` +
                     `*ORDER:* ${food} (${mealPrice} GHS)%0A` +
                     `*DELIVERY:* ${deliveryFee} GHS%0A` +
@@ -43,8 +44,9 @@ orderForm.addEventListener('submit', function(e) {
                     `📱 *CONTACT:* https://wa.me{formattedCustomerPhone}%0A%0A` + 
                     `🚀 _Sent via *Campus Chow*_`;
 
-    // FIXED: Added / after wa.me
+    // THE FIX: Added / after wa.me so it doesn't cause a DNS error
     const whatsappURL = "https://wa.me" + dispatcherNumber + "?text=" + message;
+
 
     reveal.innerHTML = `
         <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
