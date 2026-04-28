@@ -5,11 +5,11 @@ orderForm.addEventListener('submit', function(e) {
     e.preventDefault();
 
     // 1. Capture all form values
-    const name = document.getElementById('customerName').value;
-    const phone = document.getElementById('phoneNumber').value;
+    const name = document.getElementById('customerName').value.trim();
+    const phone = document.getElementById('phoneNumber').value.trim();
     const food = document.getElementById('foodItem').value;
-    const dorm = document.getElementById('dorm').value;
-    const room = document.getElementById('roomNumber').value;
+    const dorm = document.getElementById('dorm').value.trim();
+    const room = document.getElementById('roomNumber').value.trim();
     const payment = document.getElementById('paymentMethod').value;
 
     // 2. Pricing Logic + readable names
@@ -20,7 +20,7 @@ orderForm.addEventListener('submit', function(e) {
         "salad-bowl": { name: "Salad Bowl", price: 10 }
     };
 
-    const selectedMeal = menu[food] || { name: food, price: 0 };
+    const selectedMeal = menu[food] || { name: "Custom Order", price: 0 };
     const deliveryFee = 6;
     const totalAmount = selectedMeal.price + deliveryFee;
 
@@ -38,26 +38,34 @@ orderForm.addEventListener('submit', function(e) {
     // 4. Dispatcher Number
     const dispatcherNumber = "233204147897";
 
-    // 5. Build Message (clean + correct links)
+    // 5. Generate Order ID + Time
+    const orderId = "CC" + Date.now().toString().slice(-5);
+    const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+    // 6. Build Message (IMPROVED)
     const message = 
         `🚀 *CAMPUS CHOW JOB* 🚀\n\n` +
+        `🧾 *ORDER ID:* ${orderId}\n` +
+        `⏱ *TIME:* ${time}\n` +
+        `📦 *DELIVERY:* ASAP\n\n` +
         `*ORDER:* ${selectedMeal.name} (${selectedMeal.price} GHS)\n` +
-        `*DELIVERY:* ${deliveryFee} GHS\n` +
-        `*TOTAL TO COLLECT:* ${totalAmount} GHS\n\n` +
+        `*DELIVERY FEE:* ${deliveryFee} GHS\n` +
+        `*TOTAL:* ${totalAmount} GHS\n\n` +
         `--------------------------\n` +
-        `👤 *CUSTOMER:* ${name}\n` +
-        `🏠 *LOCATION:* ${dorm}, ${room}\n` +
-        `💳 *PAYMENT:* ${payment}\n` +
+        `👤 *CUSTOMER:* ${name || "N/A"}\n` +
+        `🏠 *LOCATION:* ${dorm || "N/A"}, ${room || "N/A"}\n` +
+        `💳 *PAYMENT:* ${payment || "N/A"}\n` +
         `📱 *CONTACT:* https://wa.me/${formattedCustomerPhone}\n\n` +
+        `⚡ *CLAIM:* Reply "TAKEN ${orderId}"\n\n` +
         `🚀 _Sent via *Campus Chow*_`;
 
-    // 6. Encode message (CRITICAL)
+    // 7. Encode message
     const encodedMessage = encodeURIComponent(message);
 
-    // 7. Final WhatsApp URL (correct format)
+    // 8. WhatsApp URL
     const whatsappURL = `https://wa.me/${dispatcherNumber}?text=${encodedMessage}`;
 
-    // 8. Notification Card
+    // 9. Notification Card
     reveal.innerHTML = `
         <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
             <div style="background: #22C55E; width: 10px; height: 10px; border-radius: 50%; box-shadow: 0 0 8px #22C55E;"></div>
@@ -72,12 +80,12 @@ orderForm.addEventListener('submit', function(e) {
     reveal.style.display = 'block';
     setTimeout(() => reveal.classList.add('active'), 10);
 
-    // 9. Open WhatsApp
+    // 10. Open WhatsApp
     setTimeout(() => {
         window.open(whatsappURL, '_blank');
     }, 1000);
 
-    // 10. Reset form + hide notification
+    // 11. Reset form
     orderForm.reset();
 
     setTimeout(() => {
