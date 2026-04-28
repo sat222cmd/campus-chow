@@ -12,44 +12,52 @@ orderForm.addEventListener('submit', function(e) {
     const room = document.getElementById('roomNumber').value;
     const payment = document.getElementById('paymentMethod').value;
 
-    // 2. Pricing Logic
-    const prices = {
-        "waakye-and-fish": 25,
-        "jollof-and-chicken": 30,
-        "banku-and-tilapia": 45,
-        "salad-bowl": 10
+    // 2. Pricing Logic + readable names
+    const menu = {
+        "waakye-and-fish": { name: "Waakye & Fish", price: 25 },
+        "jollof-and-chicken": { name: "Jollof & Chicken", price: 30 },
+        "banku-and-tilapia": { name: "Banku & Tilapia", price: 45 },
+        "salad-bowl": { name: "Salad Bowl", price: 10 }
     };
-    const mealPrice = prices[food] || 0;
-    const deliveryFee = 6;
-    const totalAmount = mealPrice + deliveryFee;
 
-    // 3. Robust Phone Formatting
-    let cleanPhone = phone.replace(/\D/g, ''); 
+    const selectedMeal = menu[food] || { name: food, price: 0 };
+    const deliveryFee = 6;
+    const totalAmount = selectedMeal.price + deliveryFee;
+
+    // 3. Phone Formatting (Ghana)
+    let cleanPhone = phone.replace(/\D/g, '');
+
     if (cleanPhone.startsWith('0')) {
         cleanPhone = "233" + cleanPhone.substring(1);
     } else if (!cleanPhone.startsWith('233')) {
         cleanPhone = "233" + cleanPhone;
     }
+
     const formattedCustomerPhone = cleanPhone;
 
     // 4. Dispatcher Number
-    const dispatcherNumber = "233204147897"; 
-    
-    // 5. Build Message - FIXED: Added ${} and /
-    const message = `🚀 *CAMPUS CHOW JOB* 🚀%0A%0A` +
-                    `*ORDER:* ${food} (${mealPrice} GHS)%0A` +
-                    `*DELIVERY:* ${deliveryFee} GHS%0A` +
-                    `*TOTAL TO COLLECT:* ${totalAmount} GHS%0A%0A` +
-                    `--------------------------%0A` +
-                    `👤 *CUSTOMER:* ${name}%0A` +
-                    `🏠 *LOCATION:* ${dorm}, ${room}%0A` +
-                    `📱 *CONTACT:* https://wa.me{formattedCustomerPhone}%0A%0A` + 
-                    `🚀 _Sent via *Campus Chow*_`;
+    const dispatcherNumber = "233204147897";
 
-    // ⚠️ THE CRITICAL FIX: The "/" after "wa.me/" must be there!
-    const whatsappURL = "https://wa.me/" + dispatcherNumber + "?text=" + message;
+    // 5. Build Message (clean + correct links)
+    const message = 
+        `🚀 *CAMPUS CHOW JOB* 🚀\n\n` +
+        `*ORDER:* ${selectedMeal.name} (${selectedMeal.price} GHS)\n` +
+        `*DELIVERY:* ${deliveryFee} GHS\n` +
+        `*TOTAL TO COLLECT:* ${totalAmount} GHS\n\n` +
+        `--------------------------\n` +
+        `👤 *CUSTOMER:* ${name}\n` +
+        `🏠 *LOCATION:* ${dorm}, ${room}\n` +
+        `💳 *PAYMENT:* ${payment}\n` +
+        `📱 *CONTACT:* https://wa.me/${formattedCustomerPhone}\n\n` +
+        `🚀 _Sent via *Campus Chow*_`;
 
-    // 6. Notification Card
+    // 6. Encode message (CRITICAL)
+    const encodedMessage = encodeURIComponent(message);
+
+    // 7. Final WhatsApp URL (correct format)
+    const whatsappURL = `https://wa.me/${dispatcherNumber}?text=${encodedMessage}`;
+
+    // 8. Notification Card
     reveal.innerHTML = `
         <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
             <div style="background: #22C55E; width: 10px; height: 10px; border-radius: 50%; box-shadow: 0 0 8px #22C55E;"></div>
@@ -64,15 +72,18 @@ orderForm.addEventListener('submit', function(e) {
     reveal.style.display = 'block';
     setTimeout(() => reveal.classList.add('active'), 10);
 
-    // 7. Open WhatsApp
+    // 9. Open WhatsApp
     setTimeout(() => {
         window.open(whatsappURL, '_blank');
     }, 1000);
 
-    // 8. Reset
+    // 10. Reset form + hide notification
     orderForm.reset();
+
     setTimeout(() => {
         reveal.classList.remove('active');
-        setTimeout(() => { reveal.style.display = 'none'; }, 500);
+        setTimeout(() => {
+            reveal.style.display = 'none';
+        }, 500);
     }, 6000);
 });
