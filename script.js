@@ -47,7 +47,7 @@ orderForm.addEventListener('submit', function(e) {
                     `🚀 _Sent via *Campus Chow*_`;
 
     // ⚠️ THE CRITICAL FIX: The "/" after "wa.me/" must be there!
-    const whatsappURL = "https://wa.me" + dispatcherNumber + "?text=" + message;
+    const whatsappURL = "https://wa.me/" + dispatcherNumber + "?text=" + message;
 
     // 6. Notification Card
     reveal.innerHTML = `
