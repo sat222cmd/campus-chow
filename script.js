@@ -4,6 +4,7 @@ const reveal = document.getElementById('reveal');
 orderForm.addEventListener('submit', function(e) {
     e.preventDefault();
 
+    // 1. Capture all form values
     const name = document.getElementById('customerName').value;
     const phone = document.getElementById('phoneNumber').value;
     const food = document.getElementById('foodItem').value;
@@ -11,6 +12,7 @@ orderForm.addEventListener('submit', function(e) {
     const room = document.getElementById('roomNumber').value;
     const payment = document.getElementById('paymentMethod').value;
 
+    // 2. Pricing Logic
     const prices = {
         "waakye-and-fish": 25,
         "jollof-and-chicken": 30,
@@ -21,7 +23,7 @@ orderForm.addEventListener('submit', function(e) {
     const deliveryFee = 6;
     const totalAmount = mealPrice + deliveryFee;
 
-    // 3. Formatting phone
+    // 3. Robust Phone Formatting
     let cleanPhone = phone.replace(/\D/g, ''); 
     if (cleanPhone.startsWith('0')) {
         cleanPhone = "233" + cleanPhone.substring(1);
@@ -30,10 +32,10 @@ orderForm.addEventListener('submit', function(e) {
     }
     const formattedCustomerPhone = cleanPhone;
 
+    // 4. Dispatcher Number
     const dispatcherNumber = "233204147897"; 
     
-    // 5. Build Message - FIXED: Added ${} and / 
-        // 5. Build Message - MUST have ${} and / 
+    // 5. Build Message - FIXED WITH SYMBOLS
     const message = `🚀 *CAMPUS CHOW JOB* 🚀%0A%0A` +
                     `*ORDER:* ${food} (${mealPrice} GHS)%0A` +
                     `*DELIVERY:* ${deliveryFee} GHS%0A` +
@@ -44,10 +46,10 @@ orderForm.addEventListener('submit', function(e) {
                     `📱 *CONTACT:* https://wa.me{formattedCustomerPhone}%0A%0A` + 
                     `🚀 _Sent via *Campus Chow*_`;
 
-    // THE FIX: Added / after wa.me so it doesn't cause a DNS error
+    // THE CRITICAL FIX: Added the "/" here to prevent the DNS error
     const whatsappURL = "https://wa.me" + dispatcherNumber + "?text=" + message;
 
-
+    // 6. Notification Card
     reveal.innerHTML = `
         <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
             <div style="background: #22C55E; width: 10px; height: 10px; border-radius: 50%; box-shadow: 0 0 8px #22C55E;"></div>
@@ -62,15 +64,15 @@ orderForm.addEventListener('submit', function(e) {
     reveal.style.display = 'block';
     setTimeout(() => reveal.classList.add('active'), 10);
 
+    // 7. Open WhatsApp
     setTimeout(() => {
         window.open(whatsappURL, '_blank');
     }, 1000);
 
+    // 8. Reset
     orderForm.reset();
     setTimeout(() => {
         reveal.classList.remove('active');
         setTimeout(() => { reveal.style.display = 'none'; }, 500);
     }, 6000);
 });
-
-
