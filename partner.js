@@ -1,29 +1,31 @@
 const form2 = document.querySelector("#partnerForm");
 
-// This check is the most important part!
 if (form2) {
     form2.addEventListener("submit", function(e){
-        // Now this will actually run and stop the reload
         e.preventDefault();
 
-        const businessName = document.getElementById("businessName").value;
-        const email = document.getElementById("contactEmail").value;
+        const businessName = document.getElementById("businessName").value.trim();
+        const email = document.getElementById("contactEmail").value.trim();
         const interest = document.getElementById("interest").value;
-        const note = document.getElementById("message").value;
+        const note = document.getElementById("message").value.trim();
 
-        const message = `
-        Name: ${businessName}
-        Email: ${email}
-        Interest: ${interest}
-        Note: ${note}
+        const ownerNumber = "233204147897";
 
-        Check your email! We will contact you within 24 hours.
-        `;
-      
-        alert(message);
-        form2.reset(); 
+        const message = 
+        `🤝 *NEW PARTNER REQUEST*\n\n` +
+        `🏢 *Business:* ${businessName}\n` +
+        `📧 *Email:* ${email}\n` +
+        `📌 *Interest:* ${interest}\n` +
+        `📝 *Note:* ${note || "N/A"}\n\n` +
+        `⚡ Please follow up within 24 hours`;
+
+        const encodedMessage = encodeURIComponent(message);
+        const whatsappURL = `https://wa.me/${ownerNumber}?text=${encodedMessage}`;
+
+        window.open(whatsappURL, "_blank");
+
+        alert("Request sent! We'll contact you within 24 hours 👍");
+
+        form2.reset();
     });
 }
-
-
-
