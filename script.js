@@ -39,7 +39,7 @@ orderForm.addEventListener('submit', function(e) {
     const dispatcherNumber = "233204147897";
 
     // 5. Order ID + Time
-    const orderId = "CC" + Date.now().toString().slice(-5);
+    const orderId = "CC-" + Date.now() + "-" + Math.floor(Math.random() * 1000);
     const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
     // 6. CLEAN Customer-Friendly Message (but keeps Order ID)
