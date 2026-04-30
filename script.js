@@ -5,14 +5,16 @@ const reveal = document.getElementById('reveal');
 
 if (!orderForm) return;
 
-/* ---------------- OWNER NUMBER ---------------- */
+/* ---------------- OWNER ---------------- */
 
-const ownerNumber = "233204147897"; // your WhatsApp (fixed format)
+const ownerNumber = "233204147897";
 
-/* ---------------- ORDER FORM ---------------- */
+/* ---------------- FORM HANDLER ---------------- */
 
 orderForm.addEventListener('submit', function(e) {
     e.preventDefault();
+
+    /* ---------------- INPUTS ---------------- */
 
     const name = document.getElementById('customerName').value.trim();
     const phone = document.getElementById('phoneNumber').value.trim();
@@ -30,45 +32,58 @@ orderForm.addEventListener('submit', function(e) {
         "salad-bowl": { name: "Salad Bowl", price: 10 }
     };
 
-    const selectedMeal = menu[food] || { name: "Custom Order", price: 0 };
+    const meal = menu[food] || { name: "Custom Order", price: 0 };
     const deliveryFee = 6;
-    const totalAmount = selectedMeal.price + deliveryFee;
+    const totalAmount = meal.price + deliveryFee;
 
-    /* ---------------- ORDER ID ---------------- */
+    /* ---------------- ORDER META ---------------- */
 
-    const orderId = "CC-" + Date.now() + "-" + Math.floor(Math.random() * 1000);
+    const orderId = "CC-" + Date.now().toString().slice(-6);
     const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
-    /* ---------------- WHATSAPP MESSAGE ---------------- */
+    /* ---------------- PREMIUM MESSAGE ---------------- */
 
     const message =
-`🚀 CAMPUS CHOW ORDER
+`🍽️ *CAMPUS CHOW | NEW ORDER*
 
-🧾 Order ID: ${orderId}
-⏱ Time: ${time}
+━━━━━━━━━━━━━━━━━━
+🧾 *Order ID:* ${orderId}
+⏱ *Time:* ${time}
+━━━━━━━━━━━━━━━━━━
 
-👤 Customer: ${name}
-📱 Phone: ${phone}
+👤 *Customer Details*
+Name: ${name}
+Phone: ${phone}
 
-🍽️ Food: ${selectedMeal.name}
-💰 Total: ${totalAmount} GHS
-💳 Payment: ${payment || "N/A"}
+📦 *Order Details*
+Meal: ${meal.name}
+Total: *${totalAmount} GHS* (incl. delivery)
 
-📍 Location: ${dorm}, ${room}
+📍 *Delivery Location*
+Dorm: ${dorm}
+Room: ${room}
 
-⚡ Status: New Order (Awaiting Dispatch)`;
+💳 *Payment Method:* ${payment || "N/A"}
+
+━━━━━━━━━━━━━━━━━━
+⚡ *Status:* Awaiting Dispatch
+🚀 Action: Assign Rider & Deliver
+
+_— Campus Chow System_`;
 
     const whatsappURL = `https://wa.me/${ownerNumber}?text=${encodeURIComponent(message)}`;
 
     /* ---------------- UI FEEDBACK ---------------- */
 
     reveal.innerHTML = `
-        <div style="font-weight:700;">Order Sent to You</div>
+        <div style="font-weight:700; color:#22C55E;">✔ Order Created</div>
         <div>Order ID: ${orderId}</div>
         <div>Total: ${totalAmount} GHS</div>
     `;
 
     reveal.style.display = "block";
+
+    /* ---------------- SEND ---------------- */
 
     setTimeout(() => {
         window.open(whatsappURL, "_blank");
@@ -76,6 +91,12 @@ orderForm.addEventListener('submit', function(e) {
 
     orderForm.reset();
 
+    /* ---------------- AUTO HIDE ---------------- */
+
+    setTimeout(() => {
+        reveal.style.display = "none";
+    }, 6000);
+
 });
 
-});git 
+});
