@@ -10,7 +10,7 @@ if (!orderForm) return;
 let riders = [
     { name: "Kofi", phone: "233204147897", status: "BUSY" },
     { name: "Ama", phone: "233204082511", status: "BUSY" },
-    { name: "Yaw", phone: "233204147897", status: "BUSY" }
+    { name: "Yaw", phone: "233204147897", status: "AVAILABLE" }
 ];
 
 /* ---------------- ROTATION INDEX ---------------- */
