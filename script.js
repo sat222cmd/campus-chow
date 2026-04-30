@@ -1,18 +1,100 @@
+document.addEventListener("DOMContentLoaded", () => {
+
 const orderForm = document.getElementById('orderForm');
 const reveal = document.getElementById('reveal');
+
+if (!orderForm) return;
+
+/* ---------------- RIDERS ---------------- */
+
+let riders = [
+    { name: "Kofi", phone: "233204147897", status: "BUSY" },
+    { name: "Ama", phone: "233204082511", status: "BUSY" },
+    { name: "Yaw", phone: "233204147897", status: "BUSY" }
+];
+
+/* ---------------- ROTATION INDEX ---------------- */
+/*
+This controls fairness.
+Each new order starts search from next rider.
+*/
+let lastAssignedIndex = -1;
+
+/* ---------------- QUEUE ---------------- */
+
+let orderQueue = [];
+
+/* ---------------- HELPERS ---------------- */
+
+function getNextRider() {
+    const total = riders.length;
+
+    for (let i = 0; i < total; i++) {
+        const index = (lastAssignedIndex + 1 + i) % total;
+        const rider = riders[index];
+
+        if (rider.status === "AVAILABLE") {
+            lastAssignedIndex = index;
+            return rider;
+        }
+    }
+
+    return null; // no available rider
+}
+
+function setBusy(name) {
+    const r = riders.find(x => x.name === name);
+    if (r) r.status = "BUSY";
+}
+
+function setAvailable(name) {
+    const r = riders.find(x => x.name === name);
+    if (r) r.status = "AVAILABLE";
+}
+
+/* ---------------- PROCESS QUEUE ---------------- */
+
+function processQueue() {
+    if (orderQueue.length === 0) return;
+
+    const rider = getNextRider();
+    if (!rider) return;
+
+    const next = orderQueue.shift();
+    setBusy(rider.name);
+
+    const message =
+`🚀 QUEUED ORDER
+
+🧾 ID: ${next.orderId}
+🍽️ Food: ${next.food}
+💰 Total: ${next.totalAmount} GHS
+📍 ${next.dorm}, ${next.room}
+
+⚡ Rider: ${rider.name}`;
+
+    window.open(
+        `https://wa.me/${rider.phone}?text=${encodeURIComponent(message)}`,
+        "_blank"
+    );
+
+    setTimeout(() => {
+        setAvailable(rider.name);
+        processQueue();
+    }, 15000);
+}
+
+/* ---------------- ORDER SUBMISSION ---------------- */
 
 orderForm.addEventListener('submit', function(e) {
     e.preventDefault();
 
-    // 1. Capture all form values
-    const name = document.getElementById('customerName').value.trim();
     const phone = document.getElementById('phoneNumber').value.trim();
     const food = document.getElementById('foodItem').value;
-    const dorm = document.getElementById('dorm').value.trim();
-    const room = document.getElementById('roomNumber').value.trim();
+    const dorm = document.getElementById('dorm').value;
+    const room = document.getElementById('roomNumber').value;
     const payment = document.getElementById('paymentMethod').value;
 
-    // 2. Pricing Logic
     const menu = {
         "waakye-and-fish": { name: "Waakye & Fish", price: 25 },
         "jollof-and-chicken": { name: "Jollof & Chicken", price: 30 },
@@ -20,74 +102,62 @@ orderForm.addEventListener('submit', function(e) {
         "salad-bowl": { name: "Salad Bowl", price: 10 }
     };
 
-    const selectedMeal = menu[food] || { name: "Custom Order", price: 0 };
-    const deliveryFee = 6;
-    const totalAmount = selectedMeal.price + deliveryFee;
+    const meal = menu[food] || { name: "Custom Order", price: 0 };
+    const total = meal.price + 6;
 
-    // 3. Phone Formatting
-    let cleanPhone = phone.replace(/\D/g, '');
+    const orderId = "CC-" + Date.now() + "-" + Math.floor(Math.random() * 1000);
 
-    if (cleanPhone.startsWith('0')) {
-        cleanPhone = "233" + cleanPhone.substring(1);
-    } else if (!cleanPhone.startsWith('233')) {
-        cleanPhone = "233" + cleanPhone;
+    const rider = getNextRider();
+
+    /* ---------------- IF ALL BUSY → QUEUE ---------------- */
+
+    if (!rider) {
+        orderQueue.push({
+            orderId,
+            food: meal.name,
+            dorm,
+            room,
+            totalAmount: total
+        });
+
+        alert("All riders busy. Order queued.");
+        return;
     }
 
-    const formattedCustomerPhone = cleanPhone;
+    setBusy(rider.name);
 
-    // 4. Dispatcher Number
-    const dispatcherNumber = "233204147897";
+    const message =
+`🚀 CAMPUS CHOW ORDER
 
-    // 5. Order ID + Time
-    const orderId = "CC-" + Date.now() + "-" + Math.floor(Math.random() * 1000);
-    const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+🧾 ${orderId}
+🍽️ ${meal.name}
+💰 ${total} GHS
+📍 ${dorm}, ${room}
+📱 ${phone}
 
-    // 6. CLEAN Customer-Friendly Message (but keeps Order ID)
-    const message = 
-        `🚀 *CAMPUS CHOW* 🚀\n\n` +
-        `Hi 👋 I'd like to place an order:\n\n` +
-        `🧾 *Order ID:* ${orderId}\n` +
-        `⏱ *Time:* ${time}\n\n` +
-        `🍽️ *Order:* ${selectedMeal.name}\n` +
-        `💰 *Total:* ${totalAmount} GHS\n` +
-        `📍 *Location:* ${dorm || "N/A"}, ${room || "N/A"}\n` +
-        `💳 *Payment:* ${payment || "N/A"}\n\n` +
-        `📱 *My Number:* ${formattedCustomerPhone}\n\n` +
-        `🙏 Thank you!`;
+⚡ Rider: ${rider.name}`;
 
-    // 7. Encode
-    const encodedMessage = encodeURIComponent(message);
+    const url = `https://wa.me/${rider.phone}?text=${encodeURIComponent(message)}`;
 
-    // 8. WhatsApp URL
-    const whatsappURL = `https://wa.me/${dispatcherNumber}?text=${encodedMessage}`;
-
-    // 9. Notification Card
     reveal.innerHTML = `
-        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
-            <div style="background: #22C55E; width: 10px; height: 10px; border-radius: 50%; box-shadow: 0 0 8px #22C55E;"></div>
-            <strong style="color: #FF6B35;">Order Sent</strong>
-        </div>
-        <div style="padding-left: 20px; border-left: 2px solid rgba(255,255,255,0.1);">
-            <div style="font-weight: 600;">Total: ${totalAmount} GHS</div>
-            <div style="font-size: 0.8rem; opacity: 0.7;">Complete order in WhatsApp</div>
-        </div>
+        <strong>Order Sent</strong><br>
+        Rider: ${rider.name}<br>
+        Total: ${total} GHS
     `;
 
-    reveal.style.display = 'block';
-    setTimeout(() => reveal.classList.add('active'), 10);
+    reveal.style.display = "block";
 
-    // 10. Open WhatsApp
     setTimeout(() => {
-        window.open(whatsappURL, '_blank');
-    }, 1000);
+        window.open(url, "_blank");
+    }, 700);
 
-    // 11. Reset
     orderForm.reset();
 
     setTimeout(() => {
-        reveal.classList.remove('active');
-        setTimeout(() => {
-            reveal.style.display = 'none';
-        }, 500);
-    }, 6000);
+        setAvailable(rider.name);
+        processQueue();
+    }, 15000);
+
+});
+
 });
