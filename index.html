@@ -4,91 +4,119 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Campus Chow | Fast UG Deliveries</title>
-    <!-- 1. Link your CSS first -->
+
     <link rel="stylesheet" href="styles.css">
-    <!-- 2. Use the CORRECT Font link (The old one was broken) -->
-    <link href="https://googleapis.com" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <nav class="navbar">
-        <div class="logo">Campus<span>Chow</span></div>
-        <div class="nav-links">
-            <a href="order-food.html" class="nav-btn-primary">Order Now</a>
-            <a href="partner-with-us.html">Become a Cyclist</a>
-        </div>
-    </nav>
 
-    <header class="hero">
+<!-- NAV -->
+<nav class="navbar">
+    <div class="logo">Campus<span>Chow</span></div>
+    <div class="nav-links">
+        <a href="order-food.html" class="nav-btn-primary">Order Now</a>
+        <a href="partner-with-us.html">Become a Cyclist</a>
+    </div>
+</nav>
+
+<!-- HERO (HOOK + CTA) -->
+<header class="hero">
     <div class="hero-content">
         <div class="status-badge">🟢 Deliveries active in Legon</div>
-        <h1>Cravings delivered to your <span class="accent-text">Dorm.</span></h1>
-        <p>Get Bush Canteen favorites or Night Market snacks delivered to Commonwealth, Sarbah, or Volta in 15 mins.</p>
+
+        <h1>Food delivered to your <span class="accent-text">Dorm in 15 mins.</span></h1>
+
+        <p>Skip Bush Canteen queues. Get your favorite meals delivered fast to Commonwealth, Sarbah, and beyond.</p>
+
         <div class="hero-actions">
-            <a href="order-food.html" class="btn-main">View Menu & Order</a>
-            <p style="font-size: 0.8rem; margin-top: 8px; opacity: 0.8;"> ⚡ High demand right now — delivery slots filling fast</p>
+            <a href="order-food.html" class="btn-main">Order Food Now</a>
+            <p style="font-size:0.8rem; margin-top:8px; opacity:0.8;">
+                ⚡ High demand — limited delivery slots available
+            </p>
         </div>
     </div>
+
     <div class="hero-visual">
-        <!-- Using a direct photo link that actually works -->
-        <img src="jollof.jpg" alt="Delicious Campus Food">
+        <img src="jollof.jpg" alt="Campus Food">
     </div>
 </header>
 
+<!-- TRUST STRIP -->
+<section class="section" style="text-align:center;">
+    <p style="font-weight:600; opacity:0.7;">
+        Trusted by students in Commonwealth • Akuafo • Volta • Sarbah
+    </p>
+</section>
 
-    <section class="section" id="reviews">
-        <h2 class="section-title">Loved by UG Students</h2>
-        <div class="grid-container">
-            <div class="glass-card">
-                <div class="rating">⭐⭐⭐⭐⭐</div>
-                <p>"I was skeptical, but the food came fast and was still hot. Total lifesaver during exams."</p>
-                <div class="user">
-                    <strong>Kwame Adjei</strong>
-                    <span>Legon Student</span>
-                </div>
-            </div>
-            <div class="glass-card">
-                <div class="rating">⭐⭐⭐⭐⭐</div>
-                <p>"Earning 60+ cedis a day just by cycling between classes. Best side hustle on campus!"</p>
-                <div class="user">
-                    <strong>Siraheem Okoya</strong>
-                    <span>Campus Cyclist</span>
-                </div>
-            </div>
-            <div class="glass-card">
-                <div class="rating">⭐⭐⭐⭐⭐</div>
-                <p>"I don't have to join the long queues at the bush canteen anymore. Delivery is seamless."</p>
-                <div class="user">
-                    <strong>Adwoa Boagyewaa</strong>
-                    <span>Student</span>
-                </div>
-            </div>
+<!-- HOW IT WORKS -->
+<section class="section">
+    <h2 class="section-title">How It Works</h2>
+    <div class="grid-container">
+        <div class="glass-card">
+            <h3>1. Order</h3>
+            <p>Select your meal and enter your dorm details.</p>
         </div>
-    </section>
-
-    <section class="section team">
-        <h2 class="section-title">Meet the Team</h2>
-        <div class="grid-container">
-            <div class="team-member">
-                <div class="avatar">KH</div>
-                <h3>Kataali Hardy</h3>
-                <p>Founder & CEO</p>
-            </div>
-            <div class="team-member">
-                <div class="avatar">RQ</div>
-                <h3>Richmond Quartey</h3>
-                <p>Head of Marketing</p>
-            </div>
-            <div class="team-member">
-                <div class="avatar">?</div>
-                <h3>Join Us</h3>
-                <p>Head of Product</p>
-            </div>
+        <div class="glass-card">
+            <h3>2. We Dispatch</h3>
+            <p>A nearby cyclist picks up your food immediately.</p>
         </div>
-    </section>
+        <div class="glass-card">
+            <h3>3. Delivered</h3>
+            <p>Your food arrives in 15 minutes or less.</p>
+        </div>
+    </div>
+</section>
 
-    <footer class="footer">
-        <p>&copy; 2026 Campus Chow. Made for University of Ghana.</p>
-    </footer>
+<!-- WHY US -->
+<section class="section">
+    <h2 class="section-title">Why Campus Chow</h2>
+    <div class="grid-container">
+        <div class="glass-card">
+            <h3>⚡ No Queues</h3>
+            <p>Skip long lines at Bush Canteen and Night Market.</p>
+        </div>
+        <div class="glass-card">
+            <h3>🚴 Fast Delivery</h3>
+            <p>Quick campus delivery powered by student riders.</p>
+        </div>
+        <div class="glass-card">
+            <h3>💸 Affordable</h3>
+            <p>Low delivery fee. No hidden charges.</p>
+        </div>
+    </div>
+</section>
+
+<!-- SOCIAL PROOF -->
+<section class="section" id="reviews">
+    <h2 class="section-title">What Students Are Saying</h2>
+    <div class="grid-container">
+        <div class="glass-card">
+            <p>"Food came hot and fast. No more queues for me."</p>
+            <strong>— Kwame, Legon</strong>
+        </div>
+        <div class="glass-card">
+            <p>"Best side hustle on campus. Easy money."</p>
+            <strong>— Siraheem, Cyclist</strong>
+        </div>
+        <div class="glass-card">
+            <p>"Delivery is smooth and reliable."</p>
+            <strong>— Adwoa, Student</strong>
+        </div>
+    </div>
+</section>
+
+<!-- FINAL CTA (CLOSE THE SALE) -->
+<section class="section" style="text-align:center;">
+    <h2>Hungry right now?</h2>
+    <p>Get your food delivered in minutes.</p>
+    <a href="order-food.html" class="btn-main">Order Now</a>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <p>&copy; 2026 Campus Chow. Made for University of Ghana.</p>
+</footer>
+
 </body>
 </html>
